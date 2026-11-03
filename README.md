@@ -38,13 +38,9 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 
 ## Screenshots
 
-![Screenshorts]()
-![Screenshorts]()
-
 
 ## Future Enhancements
-* 
-* 
+
 
 
 ## Credits
