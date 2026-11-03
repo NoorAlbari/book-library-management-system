@@ -1,65 +1,34 @@
 const router = require("express").Router()
 const isSignedIn = require("../middleware/is-signed-in.js");
-const Listing = require("../models/Listing.js");
+const Books = require("../models/Books.js");
+const Category = require("../models/Categories.js");
 
-router.get('/new', isSignedIn, (req, res) => {
-    res.render('listing/create-listing.ejs')
-})
+router.get('/new', isSignedIn, async (req, res) => {
+    const categories = await Category.find();
 
+    res.render('management/create.ejs', { categories });
+});
 
-router.post('/', isSignedIn, async (req, res) => {
-    const { streetAddress, city, price, size } = req.body
-    const createdListing = await Listing.create({
-        streetAddress,
-        city,
-        price,
-        size,
-        owner: req.session.user._id,
+router.post('/new', isSignedIn, async (req, res) => {
+    console.log(req.body)
+    console.log(req.session.user._id);
+    const createdBook = await Books.create({
+        title: req.body.title,
+        description: req.body.description,
+        categoryName: req.body.category,
+        author: req.body.author,
+        rating: req.body.rating,
+        publishYear: req.body.publishYear,
+        Status: req.body.Status,
+        addedBy: req.session.user._id
     })
-
-    res.redirect('/all')
+    res.redirect('/dashboard')
 })
 
 
-router.get('/all', isSignedIn, async (req, res) => {
-    const allListing = await Listing.find().populate('owner')
-    res.render('listing/all.ejs', { listing: allListing })
-})
+router.get('/dashboard', isSignedIn, async (req, res) => {
+    res.render('management/dashboard.ejs');
+});
 
-
-router.get('/:listingId', isSignedIn, async (req, res) => {
-    console.log(req.params.listingId)
-    const allListingInfo = await Listing.findById(req.params.listingId).populate('owner')
-    console.log(allListingInfo.owner._id)
-    console.log(req.session.user._id)
-     console.log(allListingInfo.owner._id.equals(req.session.user._id))
-    res.render('listing/details.ejs', { listing: allListingInfo })
-})
-
-
-
-router.delete('/:listingId', isSignedIn, async (req, res) => {
-
-   await Listing.findByIdAndDelete(req.params.listingId)
-   res.redirect('/listing/all')
-
-})
-
-
-router.post('/:listingId/favorite',async (req, res)=>{
-    const updatedListing = await Listing.findByIdAndUpdate(req.params.listingId,{$push: {favoritedByUsers: req.session.user._id}})
-  
-res.redirect('/listing/' + updatedListing._id)
-})
-
-router.post('/:listingId/unfavorite',async (req, res)=>{
-    const updatedListing = await Listing.findByIdAndUpdate(req.params.listingId,{$pull: {favoritedByUsers: req.session.user._id}})
-  
-res.redirect('/listing/' + updatedListing._id)
-})
-
-router.get('/my-listings', isSignedIn, async (req,res)=>{
-    const myListings = await Listing.find({owner: req.session.user._id})
-})
 
 module.exports = router;
