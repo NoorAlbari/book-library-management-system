@@ -20,7 +20,9 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 7. As a user (Reader), I want to be able to view book details, so I can learn more about a book before borrowing it.
 8. As a user (Librarian), I want to be able to view borrowing records, so I can monitor borrowed and returned books.
 
-## Database Design
+## Database Design (ERD)
+![Game Logo](./images/erd.png)
+
 ## Routes
 
 
@@ -45,8 +47,7 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 
 ## Credits
 
-### Audio & Music
-- 
+
 
 
 
