@@ -31,7 +31,7 @@ const booksSchema = new mongoose.Schema({
 
   Status: {
     type: String,
-    required: true,
+    enum:['Borrowed','Coming Soon','Available']
 
   },
   addedBy: {

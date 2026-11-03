@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+
+        <h1>Add a Book</h1>
+        <form method="" action="">
+            <label for="title">Book title:</label>
+            <input type="text" name="title" id="street-title" />
+
+            <label for="description">Book description:</label>
+            <input type="text" name="description" id="description" />
+
+            <label for="category">category:</label>
+            <select name="category" id="category">
+                <% for(let oneCategory of categories){%>
+                    <option value="<%=oneCategory.categoryName%>">
+                        <%=oneCategory.categoryName%>
+                    </option>
+                    <%}%>
+            </select>
+
+            <label for="author">Name of Author:</label>
+            <input type="text" name="author" id="author" />
+
+            <label for="rating">Rating: </label>
+            <input type="text" name="rating" id="rating" />
+
+            <label for="publishYear">Publish Year: </label>
+            <input type="text" name="publishYear" id="publishYear" />
+
+            <label for="Status">Book Status:</label>
+            <select name="Status" id="Status">
+                <option value="Borrowed">Borrowed</option>
+                <option value="Coming Soon">Coming Soon</option>
+                <option value="Available">Available</option>
+            </select>
+z
+            <button type="submit">Add</button>
+        </form>
+
+</body>
+
+</html>
