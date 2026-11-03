@@ -6,6 +6,8 @@
 * HTML
 * CSS
 * JavaScript
+* Node.js
+* MongoDB 
 
 ## Description
 Amber Archive is a fall-inspired Book Library Management System designed to make organizing and managing books simple and efficient. With a warm autumn aesthetic, it allows users to browse the collection, manage book records, and keep track of borrowing and returns in a cozy, welcoming digital space.
@@ -52,5 +54,8 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 
 
 ### Development & Tools
-- **Game Design & Programming:** [Noor Husain Albari]
-- **Frameworks & Libraries:** JavaScript, HTML, CSS
+- **Frameworks & Libraries:** Express.js, Mongoose, EJS
+
+
+
+
