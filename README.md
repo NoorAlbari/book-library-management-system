@@ -20,6 +20,21 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 7. As a user (Reader), I want to be able to view book details, so I can learn more about a book before borrowing it.
 8. As a user (Librarian), I want to be able to view borrowing records, so I can monitor borrowed and returned books.
 
+## Database Design
+## Routes
+
+
+
+| Method | Route | Description |
+|---------|-------|-------------|
+| GET | / | Home page |
+| GET | /listings | List all listings |
+| GET | /listings/new | New listing form |
+| POST | /listings | Create listing |
+| GET | /listings/:id | View listing |
+| GET | /listings/:id/edit | Edit listing form |
+| PUT | /listings/:id | Update listing |
+| DELETE | /listings/:id | Delete listing |
 
 ## Screenshots
 
