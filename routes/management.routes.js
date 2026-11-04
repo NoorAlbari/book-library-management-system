@@ -36,4 +36,17 @@ router.get('/dashboard', isSignedIn, async (req, res) => {
 });
 
 
+router.delete('/:bookId', isSignedIn, async (req, res) => {
+    const foundBook = await Books.findById(req.params.bookId);
+
+    if (!foundBook) {
+        return res.send('Book not found');
+    }
+
+    await Books.findByIdAndDelete(req.params.bookId);
+
+    res.redirect('/dashboard');
+});
+
+
 module.exports = router;

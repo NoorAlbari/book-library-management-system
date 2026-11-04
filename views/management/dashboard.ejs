@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
+
 <body>
     <%- include('../partials/navbar') %>
 
-    <h1>Book List</h1>
-     <% for (let oneBook of books) { %>
-        <h2><%= oneBook.title %></h2>
-        <p><%= oneBook.description %></p>
-        <p><%= oneBook.categoryName.categoryName %></p>
-        <p><%= oneBook.author %></p>
-        <p><%= oneBook.rating %></p>
-        <p><%= oneBook.publishYear %></p>
-        <p><%= oneBook.Status %></p>
+        <h1>Book List</h1>
+        <% for (let oneBook of books) { %>
+            <h2>
+                <%= oneBook.title %>
+            </h2>
+            <p>
+                <%= oneBook.description %>
+            </p>
+            <p>
+                <%= oneBook.categoryName.categoryName %>
+            </p>
+            <p>
+                <%= oneBook.author %>
+            </p>
+            <p>
+                <%= oneBook.rating %>
+            </p>
+            <p>
+                <%= oneBook.publishYear %>
+            </p>
+            <p>
+                <%= oneBook.Status %>
+            </p>
 
-    <% } %>
+            <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+            </form>
 
-    
+            <% } %>
+
+
 </body>
+
 </html>
