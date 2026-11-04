@@ -4,7 +4,7 @@ const booksSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    unique: true,
+
     trim: true
   },
   description: {
@@ -22,7 +22,8 @@ const booksSchema = new mongoose.Schema({
     trim: true
   },
   rating: {
-    type: Number,
+    type: String,
+     enum:['1 Star','2 Star','3 Star','3 Star','4 Star','5 Star']
 
   },
   publishYear: {

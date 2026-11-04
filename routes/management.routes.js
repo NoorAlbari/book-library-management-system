@@ -1,10 +1,10 @@
 const router = require("express").Router()
 const isSignedIn = require("../middleware/is-signed-in.js");
 const Books = require("../models/Books.js");
-const Category = require("../models/Categories.js");
+const Categories = require("../models/Categories.js");
 
 router.get('/new', isSignedIn, async (req, res) => {
-    const categories = await Category.find();
+    const categories = await Categories.find();
 
     res.render('management/create.ejs', { categories });
 });
@@ -15,7 +15,7 @@ router.post('/new', isSignedIn, async (req, res) => {
     const createdBook = await Books.create({
         title: req.body.title,
         description: req.body.description,
-        categoryName: req.body.category,
+        categoryName: req.body.categoryName,
         author: req.body.author,
         rating: req.body.rating,
         publishYear: req.body.publishYear,
@@ -27,7 +27,12 @@ router.post('/new', isSignedIn, async (req, res) => {
 
 
 router.get('/dashboard', isSignedIn, async (req, res) => {
-    res.render('management/dashboard.ejs');
+    const allBooks = await Books.find().populate('categoryName');
+    res.render('management/dashboard.ejs',{
+        books: allBooks,
+        user: req.session.user
+    });
+    console.log(allBooks)
 });
 
 

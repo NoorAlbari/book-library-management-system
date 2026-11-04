@@ -22,8 +22,8 @@
             <br>
             <br>
 
-            <label for="category">category:</label>
-            <select name="category" id="category">
+            <label for="categoryName">category:</label>
+            <select name="categoryName" id="categoryName">
                 <% for(let oneCategory of categories){%>
                     <option value="<%=oneCategory._id%>"><%=oneCategory.categoryName%></option>
                     <%}%>
@@ -36,8 +36,14 @@
             <br>
             <br>
 
-            <label for="rating">Rating: </label>
-            <input type="text" name="rating" id="rating"/>
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating">
+                <option value="1 Star">1 Star</option>
+                <option value="2 Star">2 Star</option>
+                <option value="3 Star">3 Star</option>
+                <option value="4 Star">4 Star</option>
+                <option value="5 Star">5 Star</option>
+            </select>
             <br>
             <br>
 

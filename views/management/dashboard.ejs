@@ -9,6 +9,17 @@
     <%- include('../partials/navbar') %>
 
     <h1>Book List</h1>
+     <% for (let oneBook of books) { %>
+        <h2><%= oneBook.title %></h2>
+        <p><%= oneBook.description %></p>
+        <p><%= oneBook.categoryName.categoryName %></p>
+        <p><%= oneBook.author %></p>
+        <p><%= oneBook.rating %></p>
+        <p><%= oneBook.publishYear %></p>
+        <p><%= oneBook.Status %></p>
+
+    <% } %>
+
     
 </body>
 </html>

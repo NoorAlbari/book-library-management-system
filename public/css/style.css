@@ -1,0 +1,25 @@
+:root {
+  /* Muted Monarch Palette[cite: 2] */
+  --color-primary: #A4530C;      /* Monarch Amber / Rust[cite: 2] */
+  --color-accent: #8DA28C;       /* Sage Green[cite: 2] */
+  --color-bg-base: #E8E2D5;      /* Warm Outer Background */
+  --color-surface: #EEE9C1;      /* Parchment Card Surface[cite: 2] */
+  --color-text-main: #3A230A;    /* Espresso Dark Brown[cite: 2] */
+  --color-text-muted: #7A634D;   /* Muted Brown */
+  
+  --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 10px 30px rgba(58, 35, 10, 0.06);
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
