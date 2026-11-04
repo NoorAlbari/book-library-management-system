@@ -1,14 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
+
 <body>
-    <%- include('./partials/navbar') %>
 
     <h1>Welcome to my Website</h1>
-    
+
+    <%- include('../partials/navbar') %>
+
+        <h1>edit a Book</h1>
+
+
+        <form action="/<%= books._id %>?_method=PUT" method="POST">
+            <label for="title">Book title:</label>
+            <input type="text" name="title" id="title" value="<%= books.title %>" />
+            <br>
+            <br>
+
+            <label for="description">Book description:</label>
+            <input type="text" name="description" id="description" value="<%= books.description %>" />
+            <br>
+            <br>
+
+            <label for="categoryName">category:</label>
+            <select name="categoryName" id="categoryName">
+                <% for(let oneCategory of categories){%>
+                    <option value="<%=oneCategory._id%>" <%
+                        if(books.categoryName._id.toString()===oneCategory._id.toString()) { %>
+                        selected
+                        <% } %>><%=oneCategory.categoryName%>
+                    </option>
+                    <%}%>
+            </select>
+            <br>
+            <br>
+
+            <label for="author">Name of Author:</label>
+            <input type="text" name="author" id="author" value="<%= books.author %>" />
+            <br>
+            <br>
+
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating">
+                <option value="1 Star" <% if(books.rating==='1 Star' ){%>selected<%} %>>1 Star</option>
+                <option value="2 Star" <% if(books.rating==='2 Star' ){%>selected<%} %>>2 Star</option>
+                <option value="3 Star" <% if(books.rating==='3 Star' ){%>selected<%} %>>3 Star</option>
+                <option value="4 Star" <% if(books.rating==='4 Star' ){%>selected<%} %>>4 Star</option>
+                <option value="5 Star" <% if(books.rating==='5 Star' ){%>selected<%} %>>5 Star</option>
+            </select>
+            <br>
+            <br>
+
+            <label for="publishYear">Publish Year: </label>
+            <input type="text" name="publishYear" id="publishYear" value="<%= books.publishYear %>" />
+            <br>
+            <br>
+
+            <label for="Status">Book Status:</label>
+            <select name="Status" id="Status">
+                <option value="Borrowed" <% if(books.Status==='Borrowed' ){%>selected<%} %>>Borrowed</option>
+                <option value="Coming Soon" <% if(books.Status==='Coming Soon' ){%>selected<%} %>>Coming Soon</option>
+                <option value="Available" <% if(books.Status==='Available' ){%>selected<%} %>>Available</option>
+            </select>
+            <br>
+            <br>
+
+            <button type="submit">Save Changes</button>
+
+        </form>
+
 </body>
+
 </html>
