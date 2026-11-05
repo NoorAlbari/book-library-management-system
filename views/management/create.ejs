@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Add</title>
 </head>
 
@@ -12,7 +12,16 @@
     <%- include('../partials/navbar') %>
 
         <h1>Add a Book</h1>
-        <form action="/new" method="POST">
+        <form action="/new" method="POST" enctype="multipart/form-data">
+            <!-- Put this exactly where you want the file picker to appear -->
+            <label for="coverImage">Upload Book Cover:</label>
+            <input type="file" id="coverImage" accept="coverImage/*" name="coverImage"/>
+
+            <!-- Container to show success, uploading status, or errors -->
+            <div id="statusMessage"></div>
+            <br>
+            <br>
+
             <label for="title">Book title:</label>
             <input type="text" name="title" id="title" />
             <br>
@@ -26,14 +35,16 @@
             <label for="categoryName">category:</label>
             <select name="categoryName" id="categoryName">
                 <% for(let oneCategory of categories){%>
-                    <option value="<%=oneCategory._id%>"><%=oneCategory.categoryName%></option>
+                    <option value="<%=oneCategory._id%>">
+                        <%=oneCategory.categoryName%>
+                    </option>
                     <%}%>
             </select>
             <br>
             <br>
 
             <label for="author">Name of Author:</label>
-            <input type="text" name="author" id="author"/>
+            <input type="text" name="author" id="author" />
             <br>
             <br>
 
@@ -49,7 +60,7 @@
             <br>
 
             <label for="publishYear">Publish Year: </label>
-            <input type="text" name="publishYear" id="publishYear"/>
+            <input type="text" name="publishYear" id="publishYear" />
             <br>
             <br>
 

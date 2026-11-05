@@ -2,6 +2,7 @@ const router = require("express").Router()
 const isSignedIn = require("../middleware/is-signed-in.js");
 const Books = require("../models/Books.js");
 const Categories = require("../models/Categories.js");
+const upload = require('../middleware/upload-images.js'); 
 
 /// To get the Categories values fron the other model to be displayed in the form as a dropdown
 router.get('/new', isSignedIn, async (req, res) => {
@@ -11,10 +12,20 @@ router.get('/new', isSignedIn, async (req, res) => {
 });
 
 //// To Add a new Book
-router.post('/new', isSignedIn, async (req, res) => {
-    console.log(req.body)
-    console.log(req.session.user._id);
+router.post('/new', isSignedIn,upload.single('coverImage'), async (req, res) => {
+     try {
+        console.log(req.body); // Text fields are safely populated here
+        console.log(req.file); // Cloudinary file details populate here
+        console.log(req.session.user._id);
+
+        // 2. Extract the Cloudinary secure URL if a file was provided
+        let coverImageUrl = '';
+        if (req.file) {
+            coverImageUrl = req.file.path; // The direct Cloudinary image link
+        }
+
     const createdBook = await Books.create({
+        coverImage: coverImageUrl,
         title: req.body.title,
         description: req.body.description,
         categoryName: req.body.categoryName,
@@ -25,6 +36,10 @@ router.post('/new', isSignedIn, async (req, res) => {
         addedBy: req.session.user._id
     })
     res.redirect('/dashboard')
+}catch (error) {
+        console.error(error);
+        res.status(500).send('Error creating book: ' + error.message);
+    }
 })
 
 //// To Display all Added Book
@@ -76,7 +91,6 @@ router.put('/:bookId', isSignedIn, async (req, res) => {
 
     res.redirect('/dashboard');
 });
-
 
 
 module.exports = router;
