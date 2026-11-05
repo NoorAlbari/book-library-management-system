@@ -1,93 +1,142 @@
-
 :root {
-  /* Muted Monarch Palette[cite: 2] */
-  --color-primary: #A4530C;      /* Monarch Amber / Rust[cite: 2] */
-  --color-accent: #8DA28C;       /* Sage Green[cite: 2] */
-  --color-bg-base: #E8E2D5;      /* Warm Outer Background */
-  --color-surface: #EEE9C1;      /* Parchment Card Surface[cite: 2] */
-  --color-text-main: #3A230A;    /* Espresso Dark Brown[cite: 2] */
-  --color-text-muted: #7A634D;   /* Muted Brown */
-  
-  --radius-lg: 24px;
-  --radius-md: 14px;
-  --radius-pill: 999px;
-  --shadow-soft: 0 10px 30px rgba(58, 35, 10, 0.06);
+  --color-espresso: #3A230A;
+  --color-monarch: #A4530C;
+  --color-cream: #EEE9C1;
+  --color-sage: #8DA28C;
+  --color-cream-soft: #FAF8F0;
 }
 
-/* Base App Container */
 body {
-  background-color: var(--color-bg-base);
-  color: var(--color-text-main);
-  font-family: 'Inter', system-ui, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
   margin: 0;
+  padding: 0;
+  background-color: var(--color-cream-soft);
+  color: var(--color-espresso);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
 }
-
-.dashboard-card {
-  background-color: #FAF8F0;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  padding: 28px;
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* Search Bar with Monarch Gradient Button */
-.search-container {
+.app-nav {
   display: flex;
   align-items: center;
-  background-color: var(--color-surface);
-  border-radius: var(--radius-pill);
-  padding: 6px 6px 6px 20px;
-  border: 1px solid rgba(58, 35, 10, 0.08);
+  justify-content: space-between;
+  padding: 14px 28px;
+  background-color: var(--color-espresso);
+  border-bottom: 1px solid rgba(238, 233, 193, 0.12);
+  box-shadow: 0 4px 18px rgba(58, 35, 10, 0.15);
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
-.search-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  color: var(--color-text-main);
-  font-size: 14px;
-  outline: none;
+/* Brand Title */
+.brand-link {
+  font-family: 'Georgia', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-cream);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s ease;
 }
 
-.search-btn {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+.brand-link:hover {
+  opacity: 0.85;
+}
+
+/* Navigation Links Container */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Base Link */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--color-cream);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(238, 233, 193, 0.1);
   color: #FFFFFF;
-  border: none;
-  border-radius: var(--radius-pill);
-  padding: 10px 22px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
-.search-btn:hover {
-  opacity: 0.92;
+/* Primary Call to Action (+ Add a Book / Sign up) */
+.nav-btn-primary {
+  background-color: var(--color-monarch);
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(164, 83, 12, 0.3);
+}
+
+.nav-btn-primary:hover {
+  background-color: #B85F10;
   transform: translateY(-1px);
 }
 
-/* Category Filter Chips */
-.category-chip {
-  display: inline-flex;
+/* Secondary / Muted Action (Logout) */
+.nav-link-muted {
+  color: rgba(238, 233, 193, 0.7);
+  font-size: 0.88rem;
+}
+
+.nav-link-muted:hover {
+  color: var(--color-cream);
+  background-color: rgba(238, 233, 193, 0.08);
+}
+
+
+
+/* Outer <search> wrapper */
+#search-container {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-  color: var(--color-text-main);
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  width: 100%;
+  max-width: 380px;
 }
 
-.category-chip.active,
-.category-chip:hover {
-  background-color: var(--color-primary);
+/* Form container */
+#search-container form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(238, 233, 193, 0.12);
+  border: 1px solid rgba(238, 233, 193, 0.22);
+  border-radius: 999px;
+  padding: 8px 18px;
+  transition: all 0.2s ease;
+}
+
+/* Focus state on input highlights the pill */
+#search-container form:focus-within {
+  background-color: rgba(238, 233, 193, 0.18);
+  border-color: var(--color-monarch);
+  box-shadow: 0 0 0 3px rgba(164, 83, 12, 0.25);
+}
+
+/* Input element */
+#search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
   color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
 }
 
+#search-input::placeholder {
+  color: rgba(238, 233, 193, 0.55);
+}
+
+/* Clear button (X) styling in WebKit browsers */
+#search-input::-webkit-search-cancel-button {
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+}
