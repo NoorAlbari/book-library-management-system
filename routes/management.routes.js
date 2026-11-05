@@ -4,6 +4,27 @@ const Books = require("../models/Books.js");
 const Categories = require("../models/Categories.js");
 const upload = require('../middleware/upload-images.js'); 
 
+const getErrorMessage = (error) => {
+    const details = error?.error?.message ?? error?.message ?? error;
+    if (typeof details === 'string') return details;
+
+    try {
+        return JSON.stringify(details);
+    } catch {
+        return String(details);
+    }
+};
+
+const uploadCoverImage = (req, res, next) => {
+    upload.single('coverImage')(req, res, (error) => {
+        if (error) {
+            console.error('Cover image upload failed:', error);
+            return res.status(500).send(`Error uploading cover image: ${getErrorMessage(error)}`);
+        }
+        next();
+    });
+};
+
 /// To get the Categories values fron the other model to be displayed in the form as a dropdown
 router.get('/new', isSignedIn, async (req, res) => {
     const categories = await Categories.find();
@@ -12,7 +33,7 @@ router.get('/new', isSignedIn, async (req, res) => {
 });
 
 //// To Add a new Book
-router.post('/new', isSignedIn,upload.single('coverImage'), async (req, res) => {
+router.post('/new', isSignedIn, uploadCoverImage, async (req, res) => {
      try {
         console.log(req.body); // Text fields are safely populated here
         console.log(req.file); // Cloudinary file details populate here
@@ -38,9 +59,9 @@ router.post('/new', isSignedIn,upload.single('coverImage'), async (req, res) => 
     res.redirect('/dashboard')
 }catch (error) {
         console.error(error);
-        res.status(500).send('Error creating book: ' + error.message);
+    res.status(500).send(`Error creating book: ${getErrorMessage(error)}`);
     }
-})
+});
 
 //// To Display all Added Book
 router.get('/dashboard', isSignedIn, async (req, res) => {

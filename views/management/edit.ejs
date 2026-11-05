@@ -16,7 +16,15 @@
         <h1>edit a Book</h1>
 
 
-        <form action="/<%= books._id %>?_method=PUT" method="POST">
+        <form action="/<%= books._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+
+            <label for="coverImage">Change Book Cover:</label>
+            <input type="file" id="coverImage" accept="image/*" name="coverImage" value="<%= books.coverImage %>" />
+ 
+            
+            <br>
+            <br>
+
             <label for="title">Book title:</label>
             <input type="text" name="title" id="title" value="<%= books.title %>" />
             <br>
