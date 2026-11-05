@@ -1,3 +1,4 @@
+
 :root {
   /* Muted Monarch Palette[cite: 2] */
   --color-primary: #A4530C;      /* Monarch Amber / Rust[cite: 2] */
@@ -13,6 +14,7 @@
   --shadow-soft: 0 10px 30px rgba(58, 35, 10, 0.06);
 }
 
+/* Base App Container */
 body {
   background-color: var(--color-bg-base);
   color: var(--color-text-main);
@@ -23,3 +25,69 @@ body {
   min-height: 100vh;
   margin: 0;
 }
+
+.dashboard-card {
+  background-color: #FAF8F0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 28px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Search Bar with Monarch Gradient Button */
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-pill);
+  padding: 6px 6px 6px 20px;
+  border: 1px solid rgba(58, 35, 10, 0.08);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-text-main);
+  font-size: 14px;
+  outline: none;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.search-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Category Filter Chips */
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.category-chip.active,
+.category-chip:hover {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+

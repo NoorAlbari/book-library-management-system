@@ -4,14 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- <link rel="stylesheet" href="../css/style.css"> -->
+      <script defer src="../js/search-bar.js"></script>
     <title>Home</title>
 </head>
 
 <body>
     <%- include('../partials/navbar') %>
 
+
+
+        <search id="search-container">
+            <form action="/search" method="GET">
+                <input type="search" name="q" placeholder="Search here..." id="search-input">
+                <button type="submit" id="search-btn">Go</button>
+            </form>
+        </search>
+
+        <br>
+
         <h1>Book List</h1>
         <% for (let oneBook of books) { %>
+            <div class="book">
             <h2>
                 <%= oneBook.title %>
             </h2>
@@ -41,7 +55,7 @@
             <form action="/<%= oneBook._id %>/edit" method="GET">
                 <button type="submit">Edit</button>
             </form>
-
+            </div>
             <% } %>
 
 
