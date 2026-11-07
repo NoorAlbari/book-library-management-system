@@ -4,50 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/search-bar.js"></script>
-    <title>Home</title>
+    <script defer src="../js/popup.js"></script>
+    <title>Dashboard</title>
 </head>
 
 <body>
     <%- include('../partials/navbar') %>
 
         <h1>Book List</h1>
+
         <% for (let oneBook of books) { %>
+
             <div class="book">
-                <img src="<%= oneBook.coverImage %>" alt="<%= oneBook.title %>">
-                    
+
+                <img src="<%= oneBook.coverImage %>" class="book-image" data-title="<%= oneBook.title %>"
+                    data-description="<%= oneBook.description %>"
+                    data-category="<%= oneBook.categoryName.categoryName %>" data-author="<%= oneBook.author %>"
+                    data-rating="<%= oneBook.rating %>" data-year="<%= oneBook.publishYear %>"
+                    data-status="<%= oneBook.Status %>">
+
                 <h2>
                     <%= oneBook.title %>
                 </h2>
-                <p>
-                    <%= oneBook.description %>
-                </p>
-                <p>
-                    <%= oneBook.categoryName.categoryName %>
-                </p>
-                <p>
-                    <%= oneBook.author %>
-                </p>
-                <p>
-                    <%= oneBook.rating %>
-                </p>
-                <p>
-                    <%= oneBook.publishYear %>
-                </p>
-                <p>
-                    <%= oneBook.Status %>
-                </p>
 
-                <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
+                 <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
 
-                <form action="/<%= oneBook._id %>/edit" method="GET">
-                    <button type="submit">Edit</button>
-                </form>
+                    <form action="/<%= oneBook._id %>/edit" method="GET">
+                        <button type="submit">Edit</button>
+                    </form>
             </div>
+
             <% } %>
+
+
+                <div class="popup" id="book-popup">
+
+                    <div class="popup-box">
+
+                        <span class="close-popup">&times;</span>
+
+                        <img id="popup-image" src="" alt="">
+
+                        <h2 id="popup-title"></h2>
+
+                        <p id="popup-description"></p>
+
+                        <p id="popup-category"></p>
+
+                        <p id="popup-author"></p>
+
+                        <p id="popup-rating"></p>
+
+                        <p id="popup-year"></p>
+
+                        <p id="popup-status"></p>
+
+                        
+
+                    </div>
+
+                </div>
+
 
 
 </body>
