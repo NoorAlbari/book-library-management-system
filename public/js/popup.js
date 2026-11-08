@@ -15,7 +15,18 @@ bookImages.forEach((image) => {
         document.querySelector('#popup-description').textContent = image.dataset.description;
         document.querySelector('#popup-category').textContent = image.dataset.category;
         document.querySelector('#popup-author').textContent = image.dataset.author;
-        document.querySelector('#popup-rating').textContent = image.dataset.rating;
+        const rating = Number(image.dataset.rating);
+        if (rating === 5) {
+            document.querySelector('#popup-rating').textContent = '⭐⭐⭐⭐⭐';
+        } else if (rating === 4) {
+            document.querySelector('#popup-rating').textContent = '⭐⭐⭐⭐';
+        } else if (rating === 3) {
+            document.querySelector('#popup-rating').textContent = '⭐⭐⭐';
+        } else if (rating === 2) {
+            document.querySelector('#popup-rating').textContent = '⭐⭐';
+        } else if (rating === 1) {
+            document.querySelector('#popup-rating').textContent = '⭐';
+        }
         document.querySelector('#popup-year').textContent = image.dataset.year;
         document.querySelector('#popup-status').textContent = image.dataset.status;
 

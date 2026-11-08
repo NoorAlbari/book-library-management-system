@@ -26,8 +26,8 @@ const booksSchema = new mongoose.Schema({
     trim: true
   },
   rating: {
-    type: String,
-     enum:['1 Star','2 Star','3 Star','3 Star','4 Star','5 Star']
+    type: Number,
+     enum:[1,2,3,3,4,5]
 
   },
   publishYear: {

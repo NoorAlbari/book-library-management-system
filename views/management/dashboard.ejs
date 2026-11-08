@@ -16,8 +16,14 @@
         <div class="shelf-section">
 
             <!-- Available Books -->
+             <div class="shelf-header">
+                    <h2 class="shelf-title">Available Books</h2>
+                    <a href="" class="shelf-link">Full shelf &rarr;</a>
+                </div>
+
             <div class="shelf">
 
+                
                 <% for (let oneBook of books) { %>
 
                     <% if(oneBook.Status==='Available' ) { %>
@@ -26,9 +32,9 @@
 
                             <img class="book-image" src="<%= oneBook.coverImage %>" data-id="<%= oneBook._id %>"
                                 data-title="<%= oneBook.title %>" data-description="<%= oneBook.description %>"
-                                data-category="<%= oneBook.categoryName.categoryName %>" data-author="<%= oneBook.author %>"
-                                data-rating="<%= oneBook.rating %>" data-year="<%= oneBook.publishYear %>"
-                                data-status="<%= oneBook.Status %>">
+                                data-category="<%= oneBook.categoryName.categoryName %>"
+                                data-author="<%= oneBook.author %>" data-rating="<%= oneBook.rating %>"
+                                data-year="<%= oneBook.publishYear %>" data-status="<%= oneBook.Status %>">
 
 
                             <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
@@ -49,7 +55,13 @@
 
 
             <!-- Coming Soon Books -->
+             <div class="shelf-header">
+                    <h2 class="shelf-title">Coming Soon</h2>
+                    <a href="" class="shelf-link">Full shelf &rarr;</a>
+                </div>
             <div class="shelf">
+                
+                 
 
                 <% for (let oneBook of books) { %>
 
@@ -78,7 +90,12 @@
 
 
             <!-- Borrowed Books -->
+            <div class="shelf-header">
+                    <h2 class="shelf-title">Borrowed Books</h2>
+                    <a href="" class="shelf-link">Full shelf &rarr;</a>
+                </div>
             <div class="shelf">
+                
 
                 <% for (let oneBook of books) { %>
 
@@ -96,7 +113,7 @@
                                 <%= oneBook.title %>
                             </h2>
 
-                        
+
                         </div>
 
                         <% } %>
