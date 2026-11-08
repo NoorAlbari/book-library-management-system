@@ -13,63 +13,140 @@
 <body>
     <%- include('../partials/navbar') %>
 
-        <h1>Book List</h1>
+        <div class="shelf-section">
 
-        <% for (let oneBook of books) { %>
+            <!-- Available Books -->
+            <div class="shelf">
 
-            <div class="book">
+                <% for (let oneBook of books) { %>
 
-                <img src="<%= oneBook.coverImage %>" class="book-image" data-title="<%= oneBook.title %>"
-                    data-description="<%= oneBook.description %>"
-                    data-category="<%= oneBook.categoryName.categoryName %>" data-author="<%= oneBook.author %>"
-                    data-rating="<%= oneBook.rating %>" data-year="<%= oneBook.publishYear %>"
-                    data-status="<%= oneBook.Status %>">
+                    <% if(oneBook.Status==='Available' ) { %>
 
-                <h2>
-                    <%= oneBook.title %>
-                </h2>
+                        <div class="book">
 
-                 <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
-                        <button type="submit">Delete</button>
-                    </form>
+                            <img class="book-image" src="<%= oneBook.coverImage %>" data-id="<%= oneBook._id %>"
+                                data-title="<%= oneBook.title %>" data-description="<%= oneBook.description %>"
+                                data-category="<%= oneBook.categoryName.name %>" data-author="<%= oneBook.author %>"
+                                data-rating="<%= oneBook.rating %>" data-year="<%= oneBook.publishYear %>"
+                                data-status="<%= oneBook.Status %>">
 
-                    <form action="/<%= oneBook._id %>/edit" method="GET">
-                        <button type="submit">Edit</button>
-                    </form>
+                            <h2>
+                                <%= oneBook.title %>
+                            </h2>
+
+                            <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+
+                            <form action="/<%= oneBook._id %>/edit" method="GET">
+                                <button type="submit">Edit</button>
+                            </form>
+
+                        </div>
+
+                        <% } %>
+
+                            <% } %>
+
             </div>
 
-            <% } %>
+
+            <!-- Coming Soon Books -->
+            <div class="shelf">
+
+                <% for (let oneBook of books) { %>
+
+                    <% if(oneBook.Status==='Coming Soon' ) { %>
+
+                        <div class="book">
+
+                            <img class="book-image" src="<%= oneBook.coverImage %>" data-id="<%= oneBook._id %>"
+                                data-description="<%= oneBook.description %>"
+                                data-category="<%= oneBook.categoryName.categoryName %>"
+                                data-author="<%= oneBook.author %>" data-rating="<%= oneBook.rating %>"
+                                data-year="<%= oneBook.publishYear %>" data-status="<%= oneBook.Status %>">
+
+                            <h2>
+                                <%= oneBook.title %>
+                            </h2>
 
 
-                <div class="popup" id="book-popup">
+                        </div>
 
-                    <div class="popup-box">
+                        <% } %>
 
-                        <span class="close-popup">&times;</span>
+                            <% } %>
 
-                        <img id="popup-image" src="" alt="">
+            </div>
 
-                        <h2 id="popup-title"></h2>
 
-                        <p id="popup-description"></p>
+            <!-- Borrowed Books -->
+            <div class="shelf">
 
-                        <p id="popup-category"></p>
+                <% for (let oneBook of books) { %>
 
-                        <p id="popup-author"></p>
+                    <% if(oneBook.Status==='Borrowed' ) { %>
 
-                        <p id="popup-rating"></p>
+                        <div class="book">
 
-                        <p id="popup-year"></p>
+                            <img class="book-image" src="<%= oneBook.coverImage %>" data-id="<%= oneBook._id %>"
+                                data-description="<%= oneBook.description %>"
+                                data-category="<%= oneBook.categoryName.categoryName %>"
+                                data-author="<%= oneBook.author %>" data-rating="<%= oneBook.rating %>"
+                                data-year="<%= oneBook.publishYear %>" data-status="<%= oneBook.Status %>">
 
-                        <p id="popup-status"></p>
+                            <h2>
+                                <%= oneBook.title %>
+                            </h2>
 
                         
+                        </div>
 
-                    </div>
+                        <% } %>
 
-                </div>
+                            <% } %>
+
+            </div>
+
+        </div>
+
+        <!-- Book Popup -->
+        <div class="popup" id="book-popup">
+
+            <div class="popup-box">
+
+                <span class="close-popup">&times;</span>
+
+                <img id="popup-image" src="" alt="">
+
+                <h2 id="popup-title"></h2>
+
+                <p id="popup-description"></p>
+
+                <p id="popup-category"></p>
+
+                <p id="popup-author"></p>
+
+                <p id="popup-rating"></p>
+
+                <p id="popup-year"></p>
+
+                <p id="popup-status"></p>
 
 
+                <!-- Edit Button -->
+                <form id="edit-form" method="GET">
+                    <button type="submit">Edit</button>
+                </form>
+
+                <!-- Delete Button -->
+                <form id="delete-form" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+
+            </div>
+
+        </div>
 
 </body>
 

@@ -1,8 +1,9 @@
+
 const bookImages = document.querySelectorAll('.book-image');
 const bookPopup = document.querySelector('#book-popup');
 const closePopup = document.querySelector('.close-popup');
-
-
+const editForm = document.querySelector('#edit-form');
+const deleteForm = document.querySelector('#delete-form');
 
 bookImages.forEach((image) => {
 
@@ -20,9 +21,20 @@ bookImages.forEach((image) => {
 
         document.querySelector('#popup-image').src = image.src;
 
+        // Get the clicked book's ID
+        const bookId = image.dataset.id;
+
+        console.log(image);
+        console.log(bookId);
+
+        // Update the forms
+        editForm.action = `/${bookId}/edit`;
+        deleteForm.action = `/${bookId}?_method=DELETE`;
+
     });
 
 });
+
 closePopup.addEventListener('click', () => {
     bookPopup.style.display = 'none';
 });

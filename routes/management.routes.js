@@ -2,7 +2,7 @@ const router = require("express").Router()
 const isSignedIn = require("../middleware/is-signed-in.js");
 const Books = require("../models/Books.js");
 const Categories = require("../models/Categories.js");
-const upload = require('../middleware/upload-images.js'); 
+const upload = require('../middleware/upload-images.js');
 
 const getErrorMessage = (error) => {
     const details = error?.error?.message ?? error?.message ?? error;
@@ -34,7 +34,7 @@ router.get('/new', isSignedIn, async (req, res) => {
 
 //// To Add a new Book
 router.post('/new', isSignedIn, uploadCoverImage, async (req, res) => {
-     try {
+    try {
         console.log(req.body); // Text fields are safely populated here
         console.log(req.file); // Cloudinary file details populate here
         console.log(req.session.user._id);
@@ -45,28 +45,28 @@ router.post('/new', isSignedIn, uploadCoverImage, async (req, res) => {
             coverImageUrl = req.file.path; // The direct Cloudinary image link
         }
 
-    const createdBook = await Books.create({
-        coverImage: coverImageUrl,
-        title: req.body.title,
-        description: req.body.description,
-        categoryName: req.body.categoryName,
-        author: req.body.author,
-        rating: req.body.rating,
-        publishYear: req.body.publishYear,
-        Status: req.body.Status,
-        addedBy: req.session.user._id
-    })
-    res.redirect('/dashboard')
-}catch (error) {
+        const createdBook = await Books.create({
+            coverImage: coverImageUrl,
+            title: req.body.title,
+            description: req.body.description,
+            categoryName: req.body.categoryName,
+            author: req.body.author,
+            rating: req.body.rating,
+            publishYear: req.body.publishYear,
+            Status: req.body.Status,
+            addedBy: req.session.user._id
+        })
+        res.redirect('/dashboard')
+    } catch (error) {
         console.error(error);
-    res.status(500).send(`Error creating book: ${getErrorMessage(error)}`);
+        res.status(500).send(`Error creating book: ${getErrorMessage(error)}`);
     }
 });
 
 //// To Display all Added Book
 router.get('/dashboard', isSignedIn, async (req, res) => {
     const allBooks = await Books.find().populate('categoryName');
-    res.render('management/dashboard.ejs',{
+    res.render('management/dashboard.ejs', {
         books: allBooks,
         user: req.session.user
     });
@@ -88,7 +88,8 @@ router.delete('/:bookId', isSignedIn, async (req, res) => {
 
 
 router.get('/:bookId/edit', isSignedIn, async (req, res) => {
-    const foundBook = await Books.findById(req.params.bookId);
+    console.log('Received book ID:', req.params.bookId);
+    const foundBook = await Books.findById(req.params.bookId).populate('categoryName');
     const categories = await Categories.find();
 
     if (!foundBook) {
@@ -102,16 +103,32 @@ router.get('/:bookId/edit', isSignedIn, async (req, res) => {
 });
 
 
-router.put('/:bookId', isSignedIn, async (req, res) => {
-     console.log('Edit route reached!');
-    console.log(req.params.bookId);
-    await Books.findByIdAndUpdate(
-        req.params.bookId,
-        req.body
-    );
 
-    res.redirect('/dashboard');
-});
+    router.put('/:bookId', isSignedIn, uploadCoverImage, async (req, res) => {
+
+        console.log('Book ID:', req.params.bookId);
+        console.log('Updated information:', req.body);
+        console.log('Uploaded image:', req.file);
+
+        const updatedData = {
+            title: req.body.title,
+            description: req.body.description,
+            categoryName: req.body.categoryName,
+            author: req.body.author,
+            rating: req.body.rating,
+            publishYear: req.body.publishYear,
+            Status: req.body.Status
+        };
+
+        if (req.file) {
+            updatedData.coverImage = req.file.path;
+        }
+
+        await Books.findByIdAndUpdate(req.params.bookId, updatedData);
+
+        res.redirect('/dashboard');
+    });
+
 
 
 module.exports = router;
