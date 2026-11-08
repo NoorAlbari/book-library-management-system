@@ -26,13 +26,10 @@
 
                             <img class="book-image" src="<%= oneBook.coverImage %>" data-id="<%= oneBook._id %>"
                                 data-title="<%= oneBook.title %>" data-description="<%= oneBook.description %>"
-                                data-category="<%= oneBook.categoryName.name %>" data-author="<%= oneBook.author %>"
+                                data-category="<%= oneBook.categoryName.categoryName %>" data-author="<%= oneBook.author %>"
                                 data-rating="<%= oneBook.rating %>" data-year="<%= oneBook.publishYear %>"
                                 data-status="<%= oneBook.Status %>">
 
-                            <h2>
-                                <%= oneBook.title %>
-                            </h2>
 
                             <form action="/<%= oneBook._id %>?_method=DELETE" method="POST">
                                 <button type="submit">Delete</button>
