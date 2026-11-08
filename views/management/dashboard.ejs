@@ -123,44 +123,50 @@
             </div>
 
         </div>
+<!-- Book Popup -->
+<div class="popup" id="book-popup">
+    <div class="popup-box">
+        <span class="close-popup">&times;</span>
 
-        <!-- Book Popup -->
-        <div class="popup" id="book-popup">
+        <!-- Top Section: Book Cover + Meta Column -->
+        <div class="popup-top">
+            <img id="popup-image" src="" alt="Book Cover">
 
-            <div class="popup-box">
+            <div class="popup-meta-col">
+                <div class="popup-title-row">
+                    <h2 id="popup-title"></h2>
+                    <span class="by-label">by</span>
+                    <span id="popup-author"></span>
+                </div>
 
-                <span class="close-popup">&times;</span>
-
-                <img id="popup-image" src="" alt="">
-
-                <h2 id="popup-title"></h2>
-
-                <p id="popup-description"></p>
-
-                <p id="popup-category"></p>
-
-                <p id="popup-author"></p>
-
-                <p id="popup-rating"></p>
-
-                <p id="popup-year"></p>
-
-                <p id="popup-status"></p>
-
-
-                <!-- Edit Button -->
-                <form id="edit-form" method="GET">
-                    <button type="submit">Edit</button>
-                </form>
-
-                <!-- Delete Button -->
-                <form id="delete-form" method="POST">
-                    <button type="submit">Delete</button>
-                </form>
-
+                <span id="popup-category"></span>
+                <span id="popup-status"></span>
+                
+                <div class="popup-rating-wrap">
+                    <span class="rating-label">Rating:</span>
+                    <span id="popup-rating"></span>
+                    <span id="popup-year"></span>
+                </div>
             </div>
-
         </div>
+
+        <!-- Middle Section: Description Box -->
+        <div class="popup-desc-box">
+            <h4>Description</h4>
+            <p id="popup-description"></p>
+        </div>
+
+        <!-- Bottom Section: Actions Row -->
+        <div class="popup-actions-row">
+            <form id="edit-form" method="GET">
+                <button type="submit">Edit</button>
+            </form>
+            <form id="delete-form" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 
