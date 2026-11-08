@@ -1,8 +1,5 @@
-
-
 const searchBarInput = document.querySelector('#search-input')
 const booksElements = document.querySelectorAll('.book')
-
 
 
 searchBarInput.addEventListener('input', (event) => {
@@ -10,8 +7,8 @@ searchBarInput.addEventListener('input', (event) => {
    
 
     booksElements.forEach((book) => {
-        const h2BookElement = book.querySelector('h2')
-        const wantedBook =  h2BookElement.textContent.toLowerCase()
+        const bookImage = book.querySelector('.book-image')
+          const wantedBook = bookImage.dataset.title.toLowerCase()
        
 
         if (wantedBook.includes(input)) {

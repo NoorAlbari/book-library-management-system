@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <title>Add</title>
 </head>
@@ -12,69 +12,89 @@
 <body>
     <%- include('../partials/navbar') %>
 
-        <h1>Add a Book</h1>
-        <form action="/new" method="POST" enctype="multipart/form-data">
-            <!-- Put this exactly where you want the file picker to appear -->
-            <label for="coverImage">Upload Book Cover:</label>
-            <input type="file" id="coverImage" accept="image/*" name="coverImage"/>
+        <h1 class="form-title">Add a Book</h1>
+        <!-- Added wrapper class "form-card" to style the entire form -->
+        <form action="/new" method="POST" enctype="multipart/form-data" class="form-card">
+            
+            <!-- Grouped 'Upload' label, input, and message container -->
+            <div class="form-group">
+                <label for="coverImage" class="form-label">Upload Book Cover:</label>
+                <input type="file" id="coverImage" accept="image/*" name="coverImage" class="file-input" />
+                <!-- Container to show success, uploading status, or errors -->
+                <div id="statusMessage" class="status-msg"></div>
+            </div>
+            
+            <!-- Removing the obsolete standard br break elements since flex grids and margins handle this modern-design -->
+            <!-- <br><br> is safely bypassed via modern stylesheet structures but kept if your template strictness needs them untouched -->
 
-            <!-- Container to show success, uploading status, or errors -->
-            <div id="statusMessage"></div>
-            <br>
-            <br>
+            <!-- Grouped 'Book title' label & input -->
+            <div class="form-group">
+                <label for="title" class="form-label">Book title:</label>
+                <input type="text" name="title" id="title" class="form-input" placeholder="Enter the book's title" />
+            </div>
 
-            <label for="title">Book title:</label>
-            <input type="text" name="title" id="title" />
-            <br>
-            <br>
+            <!-- Grouped 'Book description' label & input -->
+            <div class="form-group">
+                <label for="description" class="form-label">Book description:</label>
+                <input type="text" name="description" id="description" class="form-input" placeholder="Enter the book's description" />
+            </div>
 
-            <label for="description">Book description:</label>
-            <input type="text" name="description" id="description" />
-            <br>
-            <br>
+            <!-- Grouped 'Category' label & custom select dropdown -->
+            <div class="form-group">
+                <label for="categoryName" class="form-label">Category:</label>
+                <div class="select-wrapper">
+                    <select name="categoryName" id="categoryName" class="form-select">
+                        <% for(let oneCategory of categories){%>
+                            <option value="<%=oneCategory._id%>">
+                                <%=oneCategory.categoryName%>
+                            </option>
+                        <%}%>
+                    </select>
+                </div>
+            </div>
 
-            <label for="categoryName">category:</label>
-            <select name="categoryName" id="categoryName">
-                <% for(let oneCategory of categories){%>
-                    <option value="<%=oneCategory._id%>">
-                        <%=oneCategory.categoryName%>
-                    </option>
-                    <%}%>
-            </select>
-            <br>
-            <br>
+            <!-- Grouped 'Author Name' label & input -->
+            <div class="form-group">
+                <label for="author" class="form-label">Name of Author:</label>
+                <input type="text" name="author" id="author" class="form-input" placeholder="Enter author's name" />
+            </div>
 
-            <label for="author">Name of Author:</label>
-            <input type="text" name="author" id="author" />
-            <br>
-            <br>
+            <!-- Grouped 'Rating' label & select dropdown -->
+            <div class="form-group">
+                <label for="rating" class="form-label">Rating:</label>
+                <div class="select-wrapper">
+                    <select name="rating" id="rating" class="form-select">
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Star</option>
+                        <option value="3">3 Star</option>
+                        <option value="4">4 Star</option>
+                        <option value="5">5 Star</option>
+                    </select>
+                </div>
+            </div>
 
-            <label for="rating">Rating:</label>
-            <select name="rating" id="rating">
-                <option value="1">1 Star</option>
-                <option value="2">2 Star</option>
-                <option value="3">3 Star</option>
-                <option value="4">4 Star</option>
-                <option value="5">5 Star</option>
-            </select>
-            <br>
-            <br>
+            <!-- Grouped 'Publish Year' label & input -->
+            <div class="form-group">
+                <label for="publishYear" class="form-label">Publish Year:</label>
+                <input type="text" name="publishYear" id="publishYear" class="form-input" placeholder="e.g. 2026" />
+            </div>
 
-            <label for="publishYear">Publish Year: </label>
-            <input type="text" name="publishYear" id="publishYear" />
-            <br>
-            <br>
+            <!-- Grouped 'Book Status' label & custom dropdown -->
+            <div class="form-group">
+                <label for="Status" class="form-label">Book Status:</label>
+                <div class="select-wrapper">
+                    <select name="Status" id="Status" class="form-select">
+                        <option value="Borrowed">Borrowed</option>
+                        <option value="Coming Soon">Coming Soon</option>
+                        <option value="Available">Available</option>
+                    </select>
+                </div>
+            </div>
 
-            <label for="Status">Book Status:</label>
-            <select name="Status" id="Status">
-                <option value="Borrowed">Borrowed</option>
-                <option value="Coming Soon">Coming Soon</option>
-                <option value="Available">Available</option>
-            </select>
-            <br>
-            <br>
-
-            <button type="submit">Add</button>
+            <!-- Added action class "form-actions" & modernized "btn" design -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
         </form>
 
 </body>
