@@ -25,7 +25,24 @@ const uploadCoverImage = (req, res, next) => {
     });
 };
 
-/// To get the Categories values fron the other model to be displayed in the form as a dropdown
+router.get('/', async (req, res) => {
+    try {
+        const latestAvailableBooks = await Books.find()
+            .populate('categoryName')
+            .sort({ createdAt: -1 })
+            .limit(7);
+
+        res.render('homepage.ejs', {
+            books: latestAvailableBooks,
+            user: req.session ? req.session.user : null // In case your navbar checks user auth
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(`Error loading homepage: ${typeof getErrorMessage === 'function' ? getErrorMessage(error) : error.message}`);
+    }
+});
+
+/// To get the Categories values from the other model to be displayed in the form as a dropdown
 router.get('/new', isSignedIn, async (req, res) => {
     const categories = await Categories.find();
 
@@ -63,15 +80,7 @@ router.post('/new', isSignedIn, uploadCoverImage, async (req, res) => {
     }
 });
 
-//// To Display all Added Book
-////router.get('/dashboard', isSignedIn, async (req, res) => {
-    ////const allBooks = await Books.find().populate('categoryName');
-   //// res.render('management/dashboard.ejs', {
-       /// books: allBooks,
-        ///user: req.session.user
-   /// });
-    ///console.log(allBooks)
-///});
+
 
 //// To Display the 7 Latest Added Books
 router.get('/dashboard', isSignedIn, async (req, res) => {
@@ -146,6 +155,53 @@ router.get('/:bookId/edit', isSignedIn, async (req, res) => {
 
         res.redirect('/dashboard');
     });
+
+router.get('/full-shelf/:status', async (req, res) => {
+    try {
+        console.log('Requested status:', req.params.status);
+        const latestAvailableBooks = await Books.find({Status: req.params.status})
+            .populate('categoryName')
+            .sort({ createdAt: -1 })
+
+        console.log(latestAvailableBooks.length)
+
+        let index = 0
+        const nestedBooks = [[]]
+        for(let i = 0; i < latestAvailableBooks.length; i += 1) {
+            if (nestedBooks[index].length === 7) {
+                index++
+                nestedBooks.push([])
+            }
+            nestedBooks[index].push(latestAvailableBooks[i])
+        }
+
+        let booksStatus = ''
+
+        latestAvailableBooks.forEach((book) => {
+            if(book.Status === 'Available') {
+                booksStatus = 'Available'
+            }else if(book.Status === 'Coming Soon') {
+                booksStatus = 'Coming Soon'
+            }else if(book.Status === 'Borrowed') {
+                booksStatus = 'Borrowed'
+            }
+        })
+
+
+        console.log(nestedBooks[0])
+        console.log(nestedBooks[1])
+        
+        res.render('full-shelf.ejs', {
+            nestedBooks,
+            books: latestAvailableBooks,
+            user: req.session ? req.session.user : null, // In case your navbar checks user auth
+            booksStatus
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(`Error loading homepage: ${typeof getErrorMessage === 'function' ? getErrorMessage(error) : error.message}`);
+    }
+});
 
 
 

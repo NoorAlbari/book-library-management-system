@@ -423,7 +423,7 @@ body {
 /* Individual bookshelf */
 .shelf {
   position: relative;
-  width: 100%;
+  width: 1100px;
   min-height: 195px;
   display: flex;
   align-items: flex-end;
