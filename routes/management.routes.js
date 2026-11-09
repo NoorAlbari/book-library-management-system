@@ -64,13 +64,31 @@ router.post('/new', isSignedIn, uploadCoverImage, async (req, res) => {
 });
 
 //// To Display all Added Book
+////router.get('/dashboard', isSignedIn, async (req, res) => {
+    ////const allBooks = await Books.find().populate('categoryName');
+   //// res.render('management/dashboard.ejs', {
+       /// books: allBooks,
+        ///user: req.session.user
+   /// });
+    ///console.log(allBooks)
+///});
+
+//// To Display the 7 Latest Added Books
 router.get('/dashboard', isSignedIn, async (req, res) => {
-    const allBooks = await Books.find().populate('categoryName');
-    res.render('management/dashboard.ejs', {
-        books: allBooks,
-        user: req.session.user
-    });
-    console.log(allBooks)
+    try {
+        const latestBooks = await Books.find()
+            .populate('categoryName')
+            .sort({ createdAt: -1 }) // Sorts by newest first using timestamps
+            .limit(7);               // Limits query to the latest 7
+
+        res.render('management/dashboard.ejs', {
+            books: latestBooks,
+            user: req.session.user
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(`Error loading dashboard: ${getErrorMessage(error)}`);
+    }
 });
 
 
