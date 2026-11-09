@@ -900,3 +900,201 @@ body {
   z-index: 10;
 }
 
+.form-card h1 {
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #30190d;
+  margin-bottom: 0.35rem;
+}
+
+.form-card h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #30190d;
+  margin-bottom: 2rem;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.tree-image {
+  flex: 0 0 170px;
+  width: 170px;
+  height: auto;
+  object-fit: contain;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+}
+
+.right-panel p {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: #30190d;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.btn-home {
+  display: block;
+  width: 100%;
+  background-color: #9c4c11;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-home:hover {
+  background-color: #b45a16;
+  transform: translateY(-1px);
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #30190d;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.5rem;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.btn-back:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .error-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .right-panel {
+    text-align: center;
+  }
+}
+
+
+/* Container & Background Alignment */
+body.signIn-body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #cedec8;
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* 404 Card Container */
+.form-card-404 {
+  width: 90%;
+  max-width: 520px;
+  background-color: #f7f3ec;
+  border-radius: 28px;
+  padding: 3rem 2.5rem 2.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.form-card-404 h1 {
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #30190d;
+  margin: 0 0 0.35rem 0;
+}
+
+.form-card-404 h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #30190d;
+  margin: 0 0 2rem 0;
+}
+
+/* Side-by-side Layout */
+.error-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+/* Tree Image Styling & Seamless Blending */
+.tree-image {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  flex-shrink: 0;
+  mix-blend-mode: multiply; /* Blends tree background seamlessly into card */
+  display: block;
+}
+
+/* Right-side message & button */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.right-panel p {
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: #30190d;
+  margin: 0 0 1.25rem 0;
+  width: 100%;
+}
+
+
+/* Mobile responsive fallback */
+@media (max-width: 580px) {
+  .error-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .right-panel {
+    align-items: center;
+    text-align: center;
+  }
+}

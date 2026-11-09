@@ -4,6 +4,13 @@ const Books = require("../models/Books.js");
 const Categories = require("../models/Categories.js");
 const upload = require('../middleware/upload-images.js');
 
+
+router.get('/404-page', (req, res) => {
+    res.status(404).render('404-page.ejs', {
+        user: req.session ? req.session.user : null
+    });
+});
+
 const getErrorMessage = (error) => {
     const details = error?.error?.message ?? error?.message ?? error;
     if (typeof details === 'string') return details;
@@ -37,8 +44,7 @@ router.get('/', async (req, res) => {
             user: req.session ? req.session.user : null // In case your navbar checks user auth
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send(`Error loading homepage: ${typeof getErrorMessage === 'function' ? getErrorMessage(error) : error.message}`);
+res.redirect('/404-page');
     }
 });
 
@@ -75,8 +81,7 @@ router.post('/new', isSignedIn, uploadCoverImage, async (req, res) => {
         })
         res.redirect('/dashboard')
     } catch (error) {
-        console.error(error);
-        res.status(500).send(`Error creating book: ${getErrorMessage(error)}`);
+        res.redirect('/404-page');
     }
 });
 
@@ -95,22 +100,24 @@ router.get('/dashboard', isSignedIn, async (req, res) => {
             user: req.session.user
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send(`Error loading dashboard: ${getErrorMessage(error)}`);
+        res.redirect('/404-page');
     }
 });
 
 
 router.delete('/:bookId', isSignedIn, async (req, res) => {
     const foundBook = await Books.findById(req.params.bookId);
+    try {
 
-    if (!foundBook) {
-        return res.send('Book not found');
+        await Books.findByIdAndDelete(req.params.bookId);
+
+        res.redirect('/dashboard');
     }
 
-    await Books.findByIdAndDelete(req.params.bookId);
 
-    res.redirect('/dashboard');
+    catch (error) {
+        res.redirect('/404-page');
+    }
 });
 
 
@@ -118,34 +125,36 @@ router.get('/:bookId/edit', isSignedIn, async (req, res) => {
     console.log('Received book ID:', req.params.bookId);
     const foundBook = await Books.findById(req.params.bookId).populate('categoryName');
     const categories = await Categories.find();
+    try {
 
-    if (!foundBook) {
-        return res.send('Book not found');
+        res.render('management/edit.ejs', {
+            books: foundBook,
+            categories
+        });
     }
-
-    res.render('management/edit.ejs', {
-        books: foundBook,
-        categories
-    });
+    catch (error) {
+        res.redirect('/404-page');
+    }
 });
 
 
 
-    router.put('/:bookId', isSignedIn, uploadCoverImage, async (req, res) => {
+router.put('/:bookId', isSignedIn, uploadCoverImage, async (req, res) => {
 
-        console.log('Book ID:', req.params.bookId);
-        console.log('Updated information:', req.body);
-        console.log('Uploaded image:', req.file);
+    console.log('Book ID:', req.params.bookId);
+    console.log('Updated information:', req.body);
+    console.log('Uploaded image:', req.file);
 
-        const updatedData = {
-            title: req.body.title,
-            description: req.body.description,
-            categoryName: req.body.categoryName,
-            author: req.body.author,
-            rating: req.body.rating,
-            publishYear: req.body.publishYear,
-            Status: req.body.Status
-        };
+    const updatedData = {
+        title: req.body.title,
+        description: req.body.description,
+        categoryName: req.body.categoryName,
+        author: req.body.author,
+        rating: req.body.rating,
+        publishYear: req.body.publishYear,
+        Status: req.body.Status
+    };
+    try {
 
         if (req.file) {
             updatedData.coverImage = req.file.path;
@@ -154,12 +163,17 @@ router.get('/:bookId/edit', isSignedIn, async (req, res) => {
         await Books.findByIdAndUpdate(req.params.bookId, updatedData);
 
         res.redirect('/dashboard');
-    });
+    }
+
+    catch (error) {
+        res.redirect('/404-page');
+    }
+});
 
 router.get('/full-shelf/:status', async (req, res) => {
     try {
         console.log('Requested status:', req.params.status);
-        const latestAvailableBooks = await Books.find({Status: req.params.status})
+        const latestAvailableBooks = await Books.find({ Status: req.params.status })
             .populate('categoryName')
             .sort({ createdAt: -1 })
 
@@ -167,7 +181,7 @@ router.get('/full-shelf/:status', async (req, res) => {
 
         let index = 0
         const nestedBooks = [[]]
-        for(let i = 0; i < latestAvailableBooks.length; i += 1) {
+        for (let i = 0; i < latestAvailableBooks.length; i += 1) {
             if (nestedBooks[index].length === 7) {
                 index++
                 nestedBooks.push([])
@@ -178,11 +192,11 @@ router.get('/full-shelf/:status', async (req, res) => {
         let booksStatus = ''
 
         latestAvailableBooks.forEach((book) => {
-            if(book.Status === 'Available') {
+            if (book.Status === 'Available') {
                 booksStatus = 'Available'
-            }else if(book.Status === 'Coming Soon') {
+            } else if (book.Status === 'Coming Soon') {
                 booksStatus = 'Coming Soon'
-            }else if(book.Status === 'Borrowed') {
+            } else if (book.Status === 'Borrowed') {
                 booksStatus = 'Borrowed'
             }
         })
@@ -190,7 +204,7 @@ router.get('/full-shelf/:status', async (req, res) => {
 
         console.log(nestedBooks[0])
         console.log(nestedBooks[1])
-        
+
         res.render('full-shelf.ejs', {
             nestedBooks,
             books: latestAvailableBooks,
@@ -199,7 +213,7 @@ router.get('/full-shelf/:status', async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).send(`Error loading homepage: ${typeof getErrorMessage === 'function' ? getErrorMessage(error) : error.message}`);
+        res.redirect('/404-page');
     }
 });
 

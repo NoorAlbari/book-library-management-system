@@ -29,16 +29,17 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 
 
 
-| Method | Route | Description |
-|---------|-------|-------------|
-| GET | / | Home page |
-| GET | /listings | List all listings |
-| GET | /listings/new | New listing form |
-| POST | /listings | Create listing |
-| GET | /listings/:id | View listing |
-| GET | /listings/:id/edit | Edit listing form |
-| PUT | /listings/:id | Update listing |
-| DELETE | /listings/:id | Delete listing |
+| Method | Route               | Description                     |
+|--------|---------------------|---------------------------------|
+| GET    | /                   | Home Page                       |
+| GET    | /404-page           | 404 Error Page                  |
+| GET    | /new                | New Create Book form            |
+| POST   | /new                | Create Book                     |
+| GET    | /dashboard          | Dashboard Page                  |
+| DELETE | /:bookId            | Delete Book                     |
+| GET    | /:bookId/edit       | Edit book info form             |
+| PUT    | /:bookId            | Upadte Book info                |
+| GET    | /full-shelf/:status | View books list based on status |
 
 ## Screenshots
 
