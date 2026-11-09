@@ -17,14 +17,13 @@
 
   <!-- 3. Right: Navigation & Actions -->
   <div class="nav-links">
-    <a href="/" class="nav-link">Homepage</a>
-
     <% if (user) { %>
+      <a href="/dashboard" class="nav-link nav-link-muted" >Dashboard</a>
       <a href="/new" class="nav-link nav-btn-primary">+ Add a Book</a>
       <a href="/auth/sign-out" class="nav-link nav-link-muted">Logout</a>
     <% } else { %>
-      <a href="/auth/sign-in" class="nav-link">Login</a>
-      <a href="/auth/sign-up" class="nav-link nav-btn-primary">Sign up</a>
+       <a href="/" class="nav-link">Homepage</a>
+      <a href="/auth/sign-in" class="nav-link " >Login/Sign-Up</a>
     <% } %>
   </div>
 </nav>

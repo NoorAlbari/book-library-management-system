@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
+    
     <title>Login</title>
   </head>
   <body class="signIn-body">
     <%- include('../partials/navbar') %>
-
     <main class="page-container">
       <div class="form-card">
         <h1>Login</h1>
@@ -19,12 +19,11 @@
           <label for="password">Password</label>
           <input type="password" name="password" id="password" />
 
-          <button type="submit">Sign In</button>
+          <button type="submit">Login</button>
         </form>
 
         <div class="form-footer">
           <p>Don't have an account? <a href="/auth/sign-up">Sign up</a></p>
-          <p><a href="/auth/reset-password" class="reset-link">Reset Password</a></p>
         </div>
       </div>
     </main>
