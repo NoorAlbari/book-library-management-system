@@ -1,4 +1,4 @@
-![Game Logo](./images/the-logo.jpg)
+![website Logo](/images/the-logo.jpg)
 
 # Amber Archive - Book Library Management System
 
@@ -23,7 +23,7 @@ Amber Archive is a fall-inspired Book Library Management System designed to make
 8. As a user (Librarian), I want to be able to view borrowing records, so I can monitor borrowed and returned books.
 
 ## Database Design (ERD)
-![Game Logo](./images/erd.png)
+![Game Logo](/images/erd.png)
 
 ## Routes
 
