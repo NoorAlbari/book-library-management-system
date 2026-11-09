@@ -881,3 +881,21 @@ body {
   font-weight: normal;
   font-size: 0.82rem;
 }
+
+/* Position the canvas behind the UI */
+#leaf-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* Allows form inputs and buttons to be clicked */
+}
+
+/* Ensure the card and page content stay on top */
+.page-container,
+.form-card {
+  position: relative;
+  z-index: 10;
+}
