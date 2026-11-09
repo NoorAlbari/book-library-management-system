@@ -1,4 +1,4 @@
-![website Logo](/images/the-logo.jpg)
+![website Logo](./images/the-logo.jpg)
 
 # Amber Archive - Book Library Management System
 
