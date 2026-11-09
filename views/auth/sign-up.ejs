@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../js/falling-leaves.js" defer></script>
     <link rel="stylesheet" href="../css/style.css">
     
     <title>Sign Up</title>
   </head>
   <body class="signIn-body">
     <%- include('../partials/navbar') %>
-    <canvas id="leaf-canvas"></canvas>
+     <canvas id="leaf-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0;"></canvas>
     <main class="page-container">
       <div class="form-card">
         <h1>Sign Up</h1>
