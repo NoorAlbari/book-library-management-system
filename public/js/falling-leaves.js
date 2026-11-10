@@ -1,8 +1,9 @@
-// public/js/falling-leaves.js
+
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('leaf-canvas');
   if (!canvas) return; // Exit cleanly if canvas is not on the current page
-
+  
+//////gives access to the 2D drawing tools.
   const ctx = canvas.getContext('2d');
 
   let width = (canvas.width = window.innerWidth);

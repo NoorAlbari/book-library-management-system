@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
         const latestAvailableBooks = await Books.find()
             .populate('categoryName')
             .sort({ createdAt: -1 })
-            .limit(7);
+            ////.limit(7);
 
         res.render('homepage.ejs', {
             books: latestAvailableBooks,
@@ -93,7 +93,7 @@ router.get('/dashboard', isSignedIn, async (req, res) => {
         const latestBooks = await Books.find()
             .populate('categoryName')
             .sort({ createdAt: -1 }) // Sorts by newest first using timestamps
-            .limit(7);               // Limits query to the latest 7
+            ////.limit(7);               // Limits query to the latest 7
 
         res.render('management/dashboard.ejs', {
             books: latestBooks,
